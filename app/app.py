@@ -5,6 +5,7 @@ import pickle
 import re
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import os
 import warnings
 warnings.filterwarnings('ignore')
 import nltk
@@ -22,18 +23,31 @@ print("=" * 80)
 print("LOADING FAKE JOB DETECTOR MODEL...")
 print("=" * 80)
 
-# Load trained model
-model = load_model('../models/best_bilstm_model.h5')
-print("✅ Model loaded: best_bilstm_model.h5")
+# Get absolute project root directory
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Build model path
+MODEL_PATH = os.path.join(BASE_DIR, "models", "best_bilstm_model.h5")
+TOKENIZER_PATH = os.path.join(BASE_DIR, "models", "tokenizer.pkl")
+CONFIG_PATH = os.path.join(BASE_DIR, "models", "config.pkl")
+
+print("Model path:", MODEL_PATH)
+print("Tokenizer path:", TOKENIZER_PATH)
+print("Config path:", CONFIG_PATH)
+
+# Load model
+model = load_model(MODEL_PATH)
+print("✅ Model loaded")
 
 # Load tokenizer
-with open('../models/tokenizer.pkl', 'rb') as f:
+with open(TOKENIZER_PATH, "rb") as f:
     tokenizer = pickle.load(f)
 print("✅ Tokenizer loaded")
 
-# Load configuration
-with open('../models/config.pkl', 'rb') as f:
+# Load config
+with open(CONFIG_PATH, "rb") as f:
     config = pickle.load(f)
+print("✅ Configuration loaded")
 
 MAX_LEN = config['max_len']
 print(f"✅ Configuration loaded (MAX_LEN: {MAX_LEN})")
@@ -216,6 +230,6 @@ def health_check():
 # RUN APP
 # ============================================================================
 if __name__ == "__main__":
-    import os
+    
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
