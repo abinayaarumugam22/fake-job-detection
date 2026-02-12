@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Fake Job Detector - AI-Powered Fraud Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Fake Job Detector</h1>
+            <p>AI-Powered Fraud Detection using Deep Learning</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="number">87.8%</div>
+                    <div class="label">Detection Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">97.0%</div>
+                    <div class="label">Accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">17K+</div>
+                    <div class="label">Jobs Analyzed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="input-section">
+                <label for="jobText">Paste Job Description Below:</label>
+                <textarea 
+                    id="jobText" 
+                    placeholder="Example: We are looking for a talented software engineer to join our team. Requirements include...&#10;&#10;Paste the complete job posting including title, company info, description, requirements, and benefits."
+                ></textarea>
+                <button class="example-btn" onclick="loadExample()">📋 Load Example Job</button>
+            </div>
+
+            <div class="button-group">
+                <button class="analyze-btn" onclick="analyzeJob()">
+                    🔍 Analyze Job Posting
+                </button>
+                <button class="clear-btn" onclick="clearAll()">
+                    🗑️ Clear
+                </button>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 15px; color: #667eea; font-weight: 600;">Analyzing with AI...</p>
+            </div>
+
+            <div class="result" id="result">
+                <h2 id="resultTitle"></h2>
+                <div class="result-details">
+                    <div class="detail-box">
+                        <div class="label">Prediction</div>
+                        <div class="value" id="prediction"></div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="label">Confidence</div>
+                        <div class="value" id="confidence"></div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="label">Risk Level</div>
+                        <div class="value" id="riskLevel"></div>
+                    </div>
+                </div>
+                <div class="warning" id="warning"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🤖 Powered by BiLSTM Deep Learning Model | Built with TensorFlow & Flask</p>
+            <p>⚠️ Always verify job postings independently. This tool provides AI-based predictions only.</p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
