@@ -7,6 +7,9 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import warnings
 warnings.filterwarnings('ignore')
+import nltk
+nltk.download('stopwords', quiet=True)
+nltk.download('punkt', quiet=True)
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -213,12 +216,6 @@ def health_check():
 # RUN APP
 # ============================================================================
 if __name__ == '__main__':
-    print("\n" + "=" * 80)
-    print("🚀 STARTING FAKE JOB DETECTOR WEB APP")
-    print("=" * 80)
-    print("\n📍 Access the app at: http://127.0.0.1:5000")
-    print("📍 API endpoint: http://127.0.0.1:5000/api/predict")
-    print("\n🛑 Press CTRL+C to stop the server\n")
-    print("=" * 80 + "\n")
-    
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
