@@ -80,7 +80,7 @@ fake_job_detection/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/YOUR_USERNAME/fake-job-detection.git
+git clone https://github.com/abinayaarumugam22/fake-job-detection.git
 cd fake-job-detection
 ```
 
